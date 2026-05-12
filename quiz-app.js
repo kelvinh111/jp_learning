@@ -19,21 +19,8 @@
     potentialConditional: "quiz-data/grammar-potential-and-conditional.json",
   };
 
-  const FIXED_MODULE_KEYS = ["givingReceiving", "auxiliaryVerbs", "aspectAndChange", "potentialConditional"];
-  const FIXED_QUESTION_TARGET_COUNT = 50;
-  const FIXED_PROMPT_PREFIXES = [
-    "",
-    "情境判斷：",
-    "依文法規則判斷：",
-    "請選最自然用法：",
-    "快速反應：",
-    "語感測驗：",
-    "句型判斷：",
-    "重點再確認：",
-  ];
-
   // Bump this when quiz-data JSON changes to force fresh fetch behind CDN/proxy cache.
-  const QUESTION_DATA_VERSION = "2026-05-12-2";
+  const QUESTION_DATA_VERSION = "2026-05-12-3";
 
   const VERB_REQUIRED_MODULES = ["verbClass", "basicForms", "teAux", "stemPlus"];
   const ALL_GROUPS = ["g1", "g2", "g3"];
@@ -83,74 +70,6 @@
       choices: merged,
       answerIndex: merged.indexOf(answer),
     };
-  }
-
-  function buildChoiceOrder(choiceCount, seedA, seedB) {
-    const order = Array.from({ length: choiceCount }, (_v, idx) => idx);
-    const shift = (seedA + seedB) % choiceCount;
-    if (shift > 0) {
-      const moved = order.splice(0, shift);
-      order.push(...moved);
-    }
-
-    if ((seedA + seedB) % 2 === 1 && choiceCount >= 2) {
-      const first = order[0];
-      order[0] = order[choiceCount - 1];
-      order[choiceCount - 1] = first;
-    }
-
-    return order;
-  }
-
-  function remapQuestionChoices(question, seedA, seedB) {
-    const choiceCount = Array.isArray(question.choices) ? question.choices.length : 0;
-    if (choiceCount <= 1) {
-      return {
-        choices: Array.isArray(question.choices) ? [...question.choices] : [],
-        answerIndex: question.answerIndex,
-      };
-    }
-
-    const order = buildChoiceOrder(choiceCount, seedA, seedB);
-    return {
-      choices: order.map((idx) => question.choices[idx]),
-      answerIndex: order.indexOf(question.answerIndex),
-    };
-  }
-
-  function expandFixedQuestionPool(baseQuestions, targetCount) {
-    if (!Array.isArray(baseQuestions) || baseQuestions.length === 0) {
-      return [];
-    }
-    if (baseQuestions.length >= targetCount) {
-      return baseQuestions;
-    }
-
-    const expanded = [];
-    let variantRound = 0;
-
-    while (expanded.length < targetCount) {
-      for (let i = 0; i < baseQuestions.length; i += 1) {
-        const base = baseQuestions[i];
-        const prefix = FIXED_PROMPT_PREFIXES[variantRound % FIXED_PROMPT_PREFIXES.length];
-        const remapped = remapQuestionChoices(base, variantRound, i);
-
-        expanded.push({
-          ...base,
-          prompt: prefix ? prefix + base.prompt : base.prompt,
-          choices: remapped.choices,
-          answerIndex: remapped.answerIndex,
-        });
-
-        if (expanded.length >= targetCount) {
-          break;
-        }
-      }
-
-      variantRound += 1;
-    }
-
-    return expanded;
   }
 
   function sameVerbFormPool(verb) {
@@ -453,7 +372,6 @@
           wrongQueue: [],
           queuedFingerprints: {},
           weakMap: {},
-          fixedPoolCache: {},
           nextTimer: null,
         };
       },
@@ -509,16 +427,7 @@
           if (!dataset || !Array.isArray(dataset.questions)) {
             return [];
           }
-
-          if (!FIXED_MODULE_KEYS.includes(moduleKey)) {
-            return dataset.questions;
-          }
-
-          if (!this.fixedPoolCache[moduleKey]) {
-            this.fixedPoolCache[moduleKey] = expandFixedQuestionPool(dataset.questions, FIXED_QUESTION_TARGET_COUNT);
-          }
-
-          return this.fixedPoolCache[moduleKey];
+          return dataset.questions;
         },
         getKana(dictForm) {
           const fromVerbClass = (this.questionData.verbClass && this.questionData.verbClass.verbs) || [];
