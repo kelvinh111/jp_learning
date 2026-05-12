@@ -19,6 +19,9 @@
     potentialConditional: "quiz-data/grammar-potential-and-conditional.json",
   };
 
+  // Bump this when quiz-data JSON changes to force fresh fetch behind CDN/proxy cache.
+  const QUESTION_DATA_VERSION = "2026-05-12-2";
+
   const VERB_REQUIRED_MODULES = ["verbClass", "basicForms", "teAux", "stemPlus"];
   const ALL_GROUPS = ["g1", "g2", "g3"];
 
@@ -282,7 +285,9 @@
   }
 
   async function fetchJson(path) {
-    const res = await fetch(path, { cache: "no-store" });
+    const sep = path.includes("?") ? "&" : "?";
+    const versionedPath = path + sep + "v=" + encodeURIComponent(QUESTION_DATA_VERSION);
+    const res = await fetch(versionedPath, { cache: "no-store" });
     if (!res.ok) {
       throw new Error("載入失敗: " + path + " (" + res.status + ")");
     }

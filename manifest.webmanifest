@@ -3,7 +3,7 @@
   "short_name": "JP Quiz",
   "description": "N5-N4 日文文法反覆刷題，支援離線練習。",
   "lang": "zh-Hant",
-  "start_url": "./quiz.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

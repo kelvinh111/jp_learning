@@ -19,7 +19,7 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  const urlPath  = req.url === '/' ? '/quiz.html' : req.url.split('?')[0];
+  const urlPath  = req.url === '/' ? '/index.html' : req.url.split('?')[0];
   const filePath = path.join(DIR, decodeURIComponent(urlPath));
 
   // Prevent path traversal outside DIR
