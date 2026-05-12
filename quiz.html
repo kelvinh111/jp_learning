@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d1419" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>日文文法反覆練習</title>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("jp-quiz-theme");
+      document.documentElement.setAttribute("data-theme", saved || "dark");
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="vendor/vue.global.prod.js"></script>
+  <style>
+    :root {
+      --bg-main: #0d1419;
+      --bg-grad-1: #24353a;
+      --bg-grad-2: #173039;
+      --bg-grad-3: #0d1419;
+      --bg-panel: #152028;
+      --bg-panel-2: #1b2a34;
+      --bg-chip: #1a262f;
+      --bg-chip-active: #2f2114;
+      --bg-stat: #17242d;
+      --bg-choice: #18252e;
+      --bg-ghost: #1a2832;
+      --bg-done: #2a2118;
+      --line: #2f4450;
+      --text-main: #e8f1f7;
+      --text-soft: #a4b7c4;
+      --accent: #d8893a;
+      --accent-2: #68c7be;
+      --badge-bg: rgba(22, 38, 48, 0.85);
+      --badge-border: #395565;
+      --badge-text: #c4d5e0;
+      --link-bg: #17353a;
+      --link-border: #2b6969;
+      --mode-active-bg: #3b2917;
+      --mode-active-border: #7f5832;
+      --mode-active-ring: #986e42;
+      --quiz-head-a: #2d2318;
+      --quiz-head-b: #1a3640;
+      --ok: #7bd7a2;
+      --bad: #f59b90;
+      --choice-correct-bg: #193226;
+      --choice-correct-border: #3f8865;
+      --choice-correct-text: #b8f2d5;
+      --choice-wrong-bg: #392126;
+      --choice-wrong-border: #a7646b;
+      --choice-wrong-text: #ffc3bc;
+      --feedback-ok-bg: #162b22;
+      --feedback-ok-border: #3f8865;
+      --feedback-ok-text: #99e1bc;
+      --feedback-bad-bg: #342228;
+      --feedback-bad-border: #a7646b;
+      --feedback-bad-text: #ffc3bc;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --kbd-bg: #111a21;
+      --kbd-border: #355061;
+    }
+
+    [data-theme="sunrise"] {
+      --bg-main: #f9f6ef;
+      --bg-grad-1: #ffe9c7;
+      --bg-grad-2: #d8f1ef;
+      --bg-grad-3: #f7efe0;
+      --bg-panel: #fffdf8;
+      --bg-panel-2: #fef6e7;
+      --bg-chip: #ffffff;
+      --bg-chip-active: #fff2df;
+      --bg-stat: #ffffff;
+      --bg-choice: #ffffff;
+      --bg-ghost: #ffffff;
+      --bg-done: #fff7ea;
+      --line: #e9dcc4;
+      --text-main: #2e2a24;
+      --text-soft: #6b6254;
+      --accent: #cc6f25;
+      --accent-2: #1f7a7a;
+      --badge-bg: rgba(255, 253, 248, 0.75);
+      --badge-border: #e9dcc4;
+      --badge-text: #6b6254;
+      --link-bg: #e9f7f7;
+      --link-border: #bfe2df;
+      --mode-active-bg: #ffe8cd;
+      --mode-active-border: #db9e69;
+      --mode-active-ring: #f7c897;
+      --quiz-head-a: #fff6e8;
+      --quiz-head-b: #edf9f9;
+      --ok: #12713a;
+      --bad: #b0392f;
+      --choice-correct-bg: #ecfff4;
+      --choice-correct-border: #7fc99f;
+      --choice-correct-text: #12713a;
+      --choice-wrong-bg: #fff1ef;
+      --choice-wrong-border: #e49e97;
+      --choice-wrong-text: #b0392f;
+      --feedback-ok-bg: #effdf5;
+      --feedback-ok-border: #9cd3b2;
+      --feedback-ok-text: #12713a;
+      --feedback-bad-bg: #fff2f0;
+      --feedback-bad-border: #efb0aa;
+      --feedback-bad-text: #b0392f;
+      --shadow: 0 10px 30px rgba(59, 43, 20, 0.12);
+      --kbd-bg: #ffffff;
+      --kbd-border: #d8c7aa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: "Zen Maru Gothic", "Noto Sans TC", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 20% -5%, var(--bg-grad-1) 0%, transparent 35%),
+        radial-gradient(circle at 85% 0%, var(--bg-grad-2) 0%, transparent 30%),
+        linear-gradient(180deg, var(--bg-main) 0%, var(--bg-grad-3) 100%);
+      background-color: var(--bg-main);
+    }
+
+    .app-shell {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 14px 12px 22px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--badge-text);
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 999px;
+      padding: 6px 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    .link-btn {
+      text-decoration: none;
+      color: var(--accent-2);
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--link-bg);
+      border: 1px solid var(--link-border);
+      border-radius: 999px;
+      padding: 7px 12px;
+    }
+
+    .theme-btn {
+      border: 1px solid var(--line);
+      color: var(--text-soft);
+      background: var(--bg-chip);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .topbar-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    h1 {
+      margin: 2px 0 6px;
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .section-title {
+      margin: 14px 0 8px;
+      font-size: 13px;
+      color: var(--text-soft);
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--bg-chip);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .chip.active {
+      border-color: var(--mode-active-border);
+      background: var(--bg-chip-active);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .mode-tile {
+      border: 1px solid var(--line);
+      background: var(--bg-panel-2);
+      color: var(--text-main);
+      border-radius: 14px;
+      padding: 10px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .mode-tile.active {
+      border-color: var(--mode-active-border);
+      background: var(--mode-active-bg);
+      box-shadow: inset 0 0 0 1px var(--mode-active-ring);
+    }
+
+    .mode-tile b {
+      font-size: 14px;
+      color: inherit;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .mode-tile span {
+      font-size: 12px;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+
+    .start-btn {
+      width: 100%;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #cf7022 0%, #e59a3b 55%, #1b8d88 100%);
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(181, 113, 33, 0.34);
+    }
+
+    .start-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .stats {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .stat-box {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg-stat);
+      padding: 8px;
+      text-align: center;
+    }
+
+    .stat-box .k {
+      color: var(--text-soft);
+      font-size: 11px;
+    }
+
+    .stat-box .v {
+      font-size: 16px;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .quiz-card {
+      margin-top: 12px;
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .quiz-head {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, var(--quiz-head-a) 0%, var(--quiz-head-b) 100%);
+      font-size: 12px;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .quiz-main {
+      padding: 14px;
+    }
+
+    .prompt {
+      font-size: 22px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .hint {
+      margin-top: -8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--text-soft);
+      white-space: pre-line;
+      line-height: 1.5;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .choice {
+      text-align: left;
+      border: 1px solid var(--line);
+      background: var(--bg-choice);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 17px;
+      line-height: 1.35;
+      cursor: pointer;
+      transition: transform 0.08s ease, border-color 0.1s ease;
+    }
+
+    .choice:active {
+      transform: scale(0.99);
+    }
+
+    .choice.correct {
+      border-color: var(--choice-correct-border);
+      background: var(--choice-correct-bg);
+      color: var(--choice-correct-text);
+    }
+
+    .choice.wrong {
+      border-color: var(--choice-wrong-border);
+      background: var(--choice-wrong-bg);
+      color: var(--choice-wrong-text);
+    }
+
+    .choice.dim {
+      opacity: 0.72;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      border-radius: 12px;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1.45;
+      border: 1px solid;
+    }
+
+    .feedback.ok {
+      color: var(--feedback-ok-text);
+      border-color: var(--feedback-ok-border);
+      background: var(--feedback-ok-bg);
+    }
+
+    .feedback.bad {
+      color: var(--feedback-bad-text);
+      border-color: var(--feedback-bad-border);
+      background: var(--feedback-bad-bg);
+    }
+
+    .feedback-main {
+      display: block;
+    }
+
+    .feedback-detail {
+      margin-top: 6px;
+      white-space: pre-line;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .ghost-btn {
+      flex: 1;
+      border: 1px solid var(--line);
+      background: var(--bg-ghost);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .done {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: var(--bg-done);
+      border: 1px solid var(--mode-active-border);
+    }
+
+    .done h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+      color: var(--accent);
+    }
+
+    .weak-list {
+      margin: 6px 0 0;
+      padding-left: 16px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .kbd {
+      border: 1px solid var(--kbd-border);
+      border-bottom-width: 2px;
+      border-radius: 6px;
+      padding: 1px 6px;
+      background: var(--kbd-bg);
+      font-size: 12px;
+    }
+
+    @media (min-width: 720px) {
+      .app-shell {
+        padding: 16px 16px 28px;
+      }
+
+      .choices {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <div class="topbar">
+      <div class="badge">N5-N4 文法肌肉記憶模式</div>
+      <div class="topbar-actions">
+        <button class="theme-btn" type="button" @click="toggleTheme">{{ theme === 'dark' ? '切換淺色' : '切換深色' }}</button>
+        <a class="link-btn" href="index.html">返回筆記</a>
+      </div>
+    </div>
+
+    <div class="card" v-if="phase === 'setup'">
+      <h1>日文文法反覆刷題</h1>
+      <p class="subtitle">手機優先、少點擊。選範圍後直接連刷，錯題自動回鍋。</p>
+
+      <p class="section-title">練習模組（可複選）</p>
+      <div class="modes">
+        <button
+          v-for="module in moduleCatalog"
+          :key="module.key"
+          class="mode-tile"
+          :class="{ active: settings.modules.includes(module.key) }"
+          @click="toggleModule(module.key)"
+          type="button"
+        >
+          <b>{{ module.name }}</b>
+          <span>{{ module.desc }}</span>
+        </button>
+      </div>
+
+      <p class="section-title">動詞類別</p>
+      <p class="subtitle">分類題固定包含第一類、第二類、第三類（全開）。</p>
+
+      <p class="section-title">每回合題數</p>
+      <div class="chips">
+        <button class="chip" :class="{ active: settings.roundSize === 10 }" @click="settings.roundSize = 10" type="button">10</button>
+        <button class="chip" :class="{ active: settings.roundSize === 20 }" @click="settings.roundSize = 20" type="button">20</button>
+        <button class="chip" :class="{ active: settings.roundSize === 40 }" @click="settings.roundSize = 40" type="button">40</button>
+        <button class="chip" :class="{ active: settings.roundSize === -1 }" @click="settings.roundSize = -1" type="button">無限刷</button>
+      </div>
+
+      <p class="section-title">節奏</p>
+      <div class="chips">
+        <button class="chip" :class="{ active: settings.repeatWrong }" @click="settings.repeatWrong = !settings.repeatWrong" type="button">錯題回鍋</button>
+        <button class="chip" :class="{ active: settings.autoNext }" @click="settings.autoNext = !settings.autoNext" type="button">答後自動下一題</button>
+      </div>
+
+      <button class="start-btn" type="button" @click="startRound" :disabled="!canStart">開始刷題</button>
+      <p class="subtitle" style="margin-top:8px;">
+        快捷鍵：<span class="kbd">1-4</span> 選答案，<span class="kbd">Enter</span> 下一題，<span class="kbd">R</span> 重新一回合
+      </p>
+    </div>
+
+    <template v-else>
+      <div class="stats">
+        <div class="stat-box">
+          <div class="k">進度</div>
+          <div class="v">{{ progressLabel }}</div>
+        </div>
+        <div class="stat-box">
+          <div class="k">正確率</div>
+          <div class="v">{{ accuracy }}%</div>
+        </div>
+        <div class="stat-box">
+          <div class="k">連續答對</div>
+          <div class="v">{{ streak }}</div>
+        </div>
+        <div class="stat-box">
+          <div class="k">錯題待回鍋</div>
+          <div class="v">{{ wrongQueue.length }}</div>
+        </div>
+      </div>
+
+      <div class="quiz-card" v-if="currentQuestion">
+        <div class="quiz-head">
+          <span>模組：{{ currentQuestion.moduleName }}</span>
+          <span>{{ currentQuestion.tag }}</span>
+        </div>
+        <div class="quiz-main">
+          <div class="prompt">{{ currentQuestion.prompt }}</div>
+          <div class="hint" v-if="!answered && currentQuestion.hint">{{ currentQuestion.hint }}</div>
+
+          <div class="choices">
+            <button
+              v-for="(choice, idx) in currentQuestion.choices"
+              :key="idx"
+              type="button"
+              class="choice"
+              :class="choiceClass(idx)"
+              @click="submitAnswer(idx)"
+              :disabled="answered"
+            >
+              {{ idx + 1 }}. {{ choice }}
+            </button>
+          </div>
+
+          <div class="feedback" v-if="answered" :class="answerCorrect ? 'ok' : 'bad'">
+            <div class="feedback-main">
+              <b>{{ answerCorrect ? '答對' : '答錯' }}</b>
+              <span v-if="!answerCorrect"> 正解：{{ currentQuestion.choices[currentQuestion.answerIndex] }}。</span>
+            </div>
+            <div class="feedback-detail" v-if="!answerCorrect && currentQuestion.wrongHint">提示：{{ currentQuestion.wrongHint }}</div>
+            <div class="feedback-detail" v-else-if="currentQuestion.explain">解析：{{ currentQuestion.explain }}</div>
+          </div>
+
+          <div class="controls">
+            <button class="ghost-btn" type="button" @click="nextQuestion" :disabled="!answered">下一題（Enter）</button>
+            <button class="ghost-btn" type="button" @click="restartRound">重開本回合（R）</button>
+            <button class="ghost-btn" type="button" @click="goSetup">返回設定</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="done" v-if="phase === 'done'">
+        <h3>本回合完成</h3>
+        <div>總題數 {{ askedCount }}，答對 {{ correctCount }}，正確率 {{ accuracy }}%。</div>
+        <div style="margin-top:6px;">建議下一輪先練下面弱點：</div>
+        <ul class="weak-list">
+          <li v-for="item in weakAreas" :key="item.key">{{ item.key }}：錯 {{ item.wrong }} 題</li>
+          <li v-if="!weakAreas.length">這輪沒有明顯弱點，建議切到混合模式繼續刷。</li>
+        </ul>
+        <div class="controls" style="margin-top:10px;">
+          <button class="ghost-btn" type="button" @click="goSetup">返回測驗主頁</button>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <script src="quiz-app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch((err) => {
+          console.error("Service worker 註冊失敗", err);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

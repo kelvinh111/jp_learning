@@ -1,0 +1,9 @@
+{
+  "name": "jp-learning",
+  "version": "1.0.0",
+  "description": "Japanese learning notes viewer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

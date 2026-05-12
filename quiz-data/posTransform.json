@@ -1,0 +1,23 @@
+{
+  "module": {
+    "key": "posTransform",
+    "name": "詞性轉換",
+    "desc": "名詞/動詞/い/な 形容詞"
+  },
+  "iAdj": [
+    { "base": "寒い", "adverb": "寒く", "te": "寒くて", "negative": "寒くない", "become": "寒くなる", "becomeTeIku": "寒くなっていく", "becomeTeKuru": "寒くなってくる" },
+    { "base": "暑い", "adverb": "暑く", "te": "暑くて", "negative": "暑くない", "become": "暑くなる", "becomeTeIku": "暑くなっていく", "becomeTeKuru": "暑くなってくる" },
+    { "base": "早い", "adverb": "早く", "te": "早くて", "negative": "早くない", "become": "早くなる", "becomeTeIku": "早くなっていく", "becomeTeKuru": "早くなってくる" },
+    { "base": "難しい", "adverb": "難しく", "te": "難しくて", "negative": "難しくない", "become": "難しくなる", "becomeTeIku": "難しくなっていく", "becomeTeKuru": "難しくなってくる" }
+  ],
+  "naAdj": [
+    { "base": "静か", "adverb": "静かに", "te": "静かで", "negative": "静かじゃない", "become": "静かになる", "becomeTeIku": "静かになっていく" },
+    { "base": "元気", "adverb": "元気に", "te": "元気で", "negative": "元気じゃない", "become": "元気になる", "becomeTeIku": "元気になっていく" },
+    { "base": "親切", "adverb": "親切に", "te": "親切で", "negative": "親切じゃない", "become": "親切になる", "becomeTeIku": "親切になっていく" }
+  ],
+  "noun": [
+    { "base": "先生", "become": "先生になる", "becomeTe": "先生になって", "becomeTeIku": "先生になっていく" },
+    { "base": "医者", "become": "医者になる", "becomeTe": "医者になって", "becomeTeIku": "医者になっていく" },
+    { "base": "友達", "become": "友達になる", "becomeTe": "友達になって", "becomeTeIku": "友達になっていく" }
+  ]
+}

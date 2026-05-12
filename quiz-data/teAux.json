@@ -1,0 +1,38 @@
+{
+  "module": {
+    "key": "teAux",
+    "name": "て形外掛",
+    "desc": "ていく、てくる、てしまう..."
+  },
+  "aux": [
+    { "key": "teiru", "label": "〜ている", "suffix": "いる", "explain": "て形 + いる：進行/持續狀態。" },
+    { "key": "teiku", "label": "〜ていく", "suffix": "いく", "explain": "て形 + いく：往未來延伸、逐漸變化。" },
+    { "key": "tekuru", "label": "〜てくる", "suffix": "くる", "explain": "て形 + くる：變化從過去到現在靠近。" },
+    { "key": "teoku", "label": "〜ておく", "suffix": "おく", "explain": "て形 + おく：事先做好準備。" },
+    { "key": "teshimau", "label": "〜てしまう", "suffix": "しまう", "explain": "て形 + しまう：做完/帶遺憾語感。" },
+    { "key": "temiru", "label": "〜てみる", "suffix": "みる", "explain": "て形 + みる：試著做做看。" },
+    { "key": "tekara", "label": "〜てから", "suffix": "から", "explain": "て形 + から：先做前項，再做後項。" }
+  ],
+  "verbs": [
+    { "dict": "会う", "group": "g1", "te": "会って" },
+    { "dict": "書く", "group": "g1", "te": "書いて" },
+    { "dict": "泳ぐ", "group": "g1", "te": "泳いで" },
+    { "dict": "話す", "group": "g1", "te": "話して" },
+    { "dict": "読む", "group": "g1", "te": "読んで" },
+    { "dict": "遊ぶ", "group": "g1", "te": "遊んで" },
+    { "dict": "死ぬ", "group": "g1", "te": "死んで" },
+    { "dict": "待つ", "group": "g1", "te": "待って" },
+    { "dict": "帰る", "group": "g1", "te": "帰って" },
+    { "dict": "入る", "group": "g1", "te": "入って" },
+    { "dict": "取る", "group": "g1", "te": "取って" },
+    { "dict": "行く", "group": "g1", "te": "行って" },
+    { "dict": "食べる", "group": "g2", "te": "食べて" },
+    { "dict": "見る", "group": "g2", "te": "見て" },
+    { "dict": "起きる", "group": "g2", "te": "起きて" },
+    { "dict": "借りる", "group": "g2", "te": "借りて" },
+    { "dict": "教える", "group": "g2", "te": "教えて" },
+    { "dict": "感じる", "group": "g2", "te": "感じて" },
+    { "dict": "する", "group": "g3", "te": "して" },
+    { "dict": "来る", "group": "g3", "te": "来て" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "module": {
+    "key": "stemPlus",
+    "name": "連用形外掛",
+    "desc": "やすい、にくい、すぎる..."
+  },
+  "plugins": [
+    { "key": "yasui", "label": "〜やすい", "suffix": "やすい", "explain": "連用形 + やすい：容易做。" },
+    { "key": "nikui", "label": "〜にくい", "suffix": "にくい", "explain": "連用形 + にくい：難做、不易做。" },
+    { "key": "sugiru", "label": "〜すぎる", "suffix": "すぎる", "explain": "連用形 + すぎる：過度、太過。" },
+    { "key": "naosu", "label": "〜なおす", "suffix": "なおす", "explain": "連用形 + なおす：重做、修正。" },
+    { "key": "hajimeru", "label": "〜はじめる", "suffix": "はじめる", "explain": "連用形 + はじめる：開始做。" },
+    { "key": "owaru", "label": "〜おわる", "suffix": "おわる", "explain": "連用形 + おわる：做完。" }
+  ],
+  "verbs": [
+    { "dict": "会う", "group": "g1", "stem": "会い" },
+    { "dict": "書く", "group": "g1", "stem": "書き" },
+    { "dict": "泳ぐ", "group": "g1", "stem": "泳ぎ" },
+    { "dict": "話す", "group": "g1", "stem": "話し" },
+    { "dict": "読む", "group": "g1", "stem": "読み" },
+    { "dict": "遊ぶ", "group": "g1", "stem": "遊び" },
+    { "dict": "死ぬ", "group": "g1", "stem": "死に" },
+    { "dict": "待つ", "group": "g1", "stem": "待ち" },
+    { "dict": "帰る", "group": "g1", "stem": "帰り" },
+    { "dict": "入る", "group": "g1", "stem": "入り" },
+    { "dict": "取る", "group": "g1", "stem": "取り" },
+    { "dict": "行く", "group": "g1", "stem": "行き" },
+    { "dict": "食べる", "group": "g2", "stem": "食べ" },
+    { "dict": "見る", "group": "g2", "stem": "見" },
+    { "dict": "起きる", "group": "g2", "stem": "起き" },
+    { "dict": "借りる", "group": "g2", "stem": "借り" },
+    { "dict": "教える", "group": "g2", "stem": "教え" },
+    { "dict": "感じる", "group": "g2", "stem": "感じ" },
+    { "dict": "する", "group": "g3", "stem": "し" },
+    { "dict": "来る", "group": "g3", "stem": "来" }
+  ]
+}

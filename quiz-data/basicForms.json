@@ -1,0 +1,39 @@
+{
+  "module": {
+    "key": "basicForms",
+    "name": "基本型變換",
+    "desc": "ます/て/た/ない/可能/假定等"
+  },
+  "targets": [
+    { "key": "masu", "label": "ます形" },
+    { "key": "te", "label": "て形" },
+    { "key": "ta", "label": "た形" },
+    { "key": "nai", "label": "ない形" },
+    { "key": "potential", "label": "可能形" },
+    { "key": "ba", "label": "ば形" },
+    { "key": "volitional", "label": "意向形" },
+    { "key": "imperative", "label": "命令形" }
+  ],
+  "verbs": [
+    { "dict": "会う", "kana": "あう", "group": "g1", "forms": { "masu": "会います", "te": "会って", "ta": "会った", "nai": "会わない", "potential": "会える", "ba": "会えば", "volitional": "会おう", "imperative": "会え" } },
+    { "dict": "書く", "kana": "かく", "group": "g1", "forms": { "masu": "書きます", "te": "書いて", "ta": "書いた", "nai": "書かない", "potential": "書ける", "ba": "書けば", "volitional": "書こう", "imperative": "書け" } },
+    { "dict": "泳ぐ", "kana": "およぐ", "group": "g1", "forms": { "masu": "泳ぎます", "te": "泳いで", "ta": "泳いだ", "nai": "泳がない", "potential": "泳げる", "ba": "泳げば", "volitional": "泳ごう", "imperative": "泳げ" } },
+    { "dict": "話す", "kana": "はなす", "group": "g1", "forms": { "masu": "話します", "te": "話して", "ta": "話した", "nai": "話さない", "potential": "話せる", "ba": "話せば", "volitional": "話そう", "imperative": "話せ" } },
+    { "dict": "読む", "kana": "よむ", "group": "g1", "forms": { "masu": "読みます", "te": "読んで", "ta": "読んだ", "nai": "読まない", "potential": "読める", "ba": "読めば", "volitional": "読もう", "imperative": "読め" } },
+    { "dict": "遊ぶ", "kana": "あそぶ", "group": "g1", "forms": { "masu": "遊びます", "te": "遊んで", "ta": "遊んだ", "nai": "遊ばない", "potential": "遊べる", "ba": "遊べば", "volitional": "遊ぼう", "imperative": "遊べ" } },
+    { "dict": "死ぬ", "kana": "しぬ", "group": "g1", "forms": { "masu": "死にます", "te": "死んで", "ta": "死んだ", "nai": "死なない", "potential": "死ねる", "ba": "死ねば", "volitional": "死のう", "imperative": "死ね" } },
+    { "dict": "待つ", "kana": "まつ", "group": "g1", "forms": { "masu": "待ちます", "te": "待って", "ta": "待った", "nai": "待たない", "potential": "待てる", "ba": "待てば", "volitional": "待とう", "imperative": "待て" } },
+    { "dict": "帰る", "kana": "かえる", "group": "g1", "forms": { "masu": "帰ります", "te": "帰って", "ta": "帰った", "nai": "帰らない", "potential": "帰れる", "ba": "帰れば", "volitional": "帰ろう", "imperative": "帰れ" } },
+    { "dict": "入る", "kana": "はいる", "group": "g1", "forms": { "masu": "入ります", "te": "入って", "ta": "入った", "nai": "入らない", "potential": "入れる", "ba": "入れば", "volitional": "入ろう", "imperative": "入れ" } },
+    { "dict": "取る", "kana": "とる", "group": "g1", "forms": { "masu": "取ります", "te": "取って", "ta": "取った", "nai": "取らない", "potential": "取れる", "ba": "取れば", "volitional": "取ろう", "imperative": "取れ" } },
+    { "dict": "行く", "kana": "いく", "group": "g1", "forms": { "masu": "行きます", "te": "行って", "ta": "行った", "nai": "行かない", "potential": "行ける", "ba": "行けば", "volitional": "行こう", "imperative": "行け" } },
+    { "dict": "食べる", "kana": "たべる", "group": "g2", "forms": { "masu": "食べます", "te": "食べて", "ta": "食べた", "nai": "食べない", "potential": "食べられる", "ba": "食べれば", "volitional": "食べよう", "imperative": "食べろ" } },
+    { "dict": "見る", "kana": "みる", "group": "g2", "forms": { "masu": "見ます", "te": "見て", "ta": "見た", "nai": "見ない", "potential": "見られる", "ba": "見れば", "volitional": "見よう", "imperative": "見ろ" } },
+    { "dict": "起きる", "kana": "おきる", "group": "g2", "forms": { "masu": "起きます", "te": "起きて", "ta": "起きた", "nai": "起きない", "potential": "起きられる", "ba": "起きれば", "volitional": "起きよう", "imperative": "起きろ" } },
+    { "dict": "借りる", "kana": "かりる", "group": "g2", "forms": { "masu": "借ります", "te": "借りて", "ta": "借りた", "nai": "借りない", "potential": "借りられる", "ba": "借りれば", "volitional": "借りよう", "imperative": "借りろ" } },
+    { "dict": "教える", "kana": "おしえる", "group": "g2", "forms": { "masu": "教えます", "te": "教えて", "ta": "教えた", "nai": "教えない", "potential": "教えられる", "ba": "教えれば", "volitional": "教えよう", "imperative": "教えろ" } },
+    { "dict": "感じる", "kana": "かんじる", "group": "g2", "forms": { "masu": "感じます", "te": "感じて", "ta": "感じた", "nai": "感じない", "potential": "感じられる", "ba": "感じれば", "volitional": "感じよう", "imperative": "感じろ" } },
+    { "dict": "する", "kana": "する", "group": "g3", "forms": { "masu": "します", "te": "して", "ta": "した", "nai": "しない", "potential": "できる", "ba": "すれば", "volitional": "しよう", "imperative": "しろ" } },
+    { "dict": "来る", "kana": "くる", "group": "g3", "forms": { "masu": "来ます", "te": "来て", "ta": "来た", "nai": "来ない", "potential": "来られる", "ba": "来れば", "volitional": "来よう", "imperative": "来い" } }
+  ]
+}
