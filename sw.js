@@ -14,6 +14,7 @@ const PRECACHE_URLS = [
   "./pwa/icon-192.svg",
   "./pwa/icon-512.svg",
   "./vendor/vue.global.prod.js",
+  "./vendor/marked.min.js",
   "./quiz-data/verbClass.json",
   "./quiz-data/basicForms.json",
   "./quiz-data/teAux.json",
